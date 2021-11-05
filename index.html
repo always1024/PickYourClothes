@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="Access-Control-Allow-Origin" content="*" />
+    <title>index</title>
+    <style>
+        div{
+            text-align:center;
+        }
+    </style>
+</head>
+<body>
+    <div>
+        <div>
+            <button id="lc" onclick="leftC()"><img src="./statics/left.jpg" height="300px" width="150px"></button>
+            <img height="300px" width="500px" id="cp">
+            <button id="rc" onclick="rightC()"><img src="./statics/right.jpg" height="300px" width="150px"></button>
+        </div>
+        <div>
+            <button id="lt" onclick="leftT()"><img src="./statics/left.jpg" height="300px" width="150px"></button>
+            <img height="300px" width="500px" id="tp">
+            <button id="rt" onclick="rightT()"><img src="./statics/right.jpg" height="300px" width="150px"></button>
+        </div>
+    </div>
+
+</body>
+<script src="https://cdn.staticfile.org/jquery/1.10.2/jquery.min.js"></script>
+<script>
+    var image = "";
+     $.ajax({
+            type:"GET",
+            url:"http://127.0.0.1:8081/getPhoto",
+            dataType:"json",
+            async: false,
+            success:function(data){
+                image = data
+            },
+            error:function(jqXHR){
+                console.log("Error: "+jqXHR.status);
+            }
+     });
+    var i = 0;
+    var j = image.length / 2;
+    document.getElementById("cp").src = image[i];
+    document.getElementById("tp").src = image[j];
+    function leftC(){
+        if(i > 0) i--;
+        document.getElementById("cp").src = image[i];
+        document.getElementById("tp").src = image[j];
+    }
+    function rightC(){
+        if(i < 4) i++;
+        document.getElementById("cp").src = image[i];
+        document.getElementById("tp").src = image[j];
+    }
+    function leftT(){
+        if(j > 5) j--;
+        document.getElementById("cp").src = image[i];
+        document.getElementById("tp").src = image[j];
+    }
+    function rightT(){
+        if(j < 8) j++;
+        document.getElementById("cp").src = image[i];
+        document.getElementById("tp").src = image[j];
+    }
+</script>
+</html>
