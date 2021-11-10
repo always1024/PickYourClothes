@@ -13,14 +13,15 @@
 <body>
     <div>
         <div>
-            <button id="lc" onclick="leftC()"><img src="./statics/left.jpg" height="300px" width="150px"></button>
+            <button id="lc" onclick="PickClothes('lc')"><img src="./statics/left.jpg" height="300px" width="150px"></button>
             <img height="300px" width="500px" id="cp">
-            <button id="rc" onclick="rightC()"><img src="./statics/right.jpg" height="300px" width="150px"></button>
+
+            <button id="rc" onclick="PickClothes('rc')"><img src="./statics/right.jpg" height="300px" width="150px"></button>
         </div>
         <div>
-            <button id="lt" onclick="leftT()"><img src="./statics/left.jpg" height="300px" width="150px"></button>
+            <button id="lt" onclick="PickClothes('lt')"><img src="./statics/left.jpg" height="300px" width="150px"></button>
             <img height="300px" width="500px" id="tp">
-            <button id="rt" onclick="rightT()"><img src="./statics/right.jpg" height="300px" width="150px"></button>
+            <button id="rt" onclick="PickClothes('rt')"><img src="./statics/right.jpg" height="300px" width="150px"></button>
         </div>
     </div>
 
@@ -38,29 +39,30 @@
             },
             error:function(jqXHR){
                 console.log("Error: "+jqXHR.status);
+                alert("网络连接错误！");
             }
      });
+     
     var i = 0;
     var j = image.length / 2;
     document.getElementById("cp").src = image[i];
     document.getElementById("tp").src = image[j];
-    function leftC(){
-        if(i > 0) i--;
-        document.getElementById("cp").src = image[i];
-        document.getElementById("tp").src = image[j];
-    }
-    function rightC(){
-        if(i < 4) i++;
-        document.getElementById("cp").src = image[i];
-        document.getElementById("tp").src = image[j];
-    }
-    function leftT(){
-        if(j > 5) j--;
-        document.getElementById("cp").src = image[i];
-        document.getElementById("tp").src = image[j];
-    }
-    function rightT(){
-        if(j < 8) j++;
+
+    function PickClothes(location){
+        switch(location){
+            case "lc":
+                if(i > 0) i--;
+                break;
+            case "rc":
+                if(i < image.length / 2 - 1) i++;
+                break;
+            case "lt":
+                if(j > image.length / 2) j--;
+                break;
+            case "rt":
+                if(j < image.length - 2) j++;
+                break;
+        }
         document.getElementById("cp").src = image[i];
         document.getElementById("tp").src = image[j];
     }
